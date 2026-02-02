@@ -9,19 +9,14 @@ class HeartbeatNode : public rclcpp::Node {
 	public:
 		HeartbeatNode() : rclcpp::Node("hearbeat_node"), count_(0) {
       
-      timer_ = this->create_wall_timer(1s, std::bind(&HeartbeatNode::on_timer,this));	
-    
-      RCLCPP_INFO(this->get_logger(), "Heartbeat Node started");
-
-    
+      timer_ = this->create_wall_timer(1s, std::bind(&HeartbeatNode::on_timer,this));	 
+      RCLCPP_INFO(this->get_logger(), "Heartbeat Node started"); 
     } 
-  private:
-    
+
+  private:    
     void on_timer() { 
       RCLCPP_INFO(this->get_logger(), "tick %zu", count_++);
-
-    }
-  
+    } 
   rclcpp::TimerBase::SharedPtr timer_;
   std::size_t count_;
           
