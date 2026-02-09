@@ -17,7 +17,10 @@ class HeartbeatNode : public rclcpp::Node {
     void on_timer() { 
       RCLCPP_INFO(this->get_logger(), "tick %zu", count_++);
     } 
+
+  //timer_ is a shared-ownership pointer to a ROS timer object.
   rclcpp::TimerBase::SharedPtr timer_;
+ 
   std::size_t count_;
           
 };
@@ -25,7 +28,8 @@ class HeartbeatNode : public rclcpp::Node {
 int main(int argc, char ** argv) {
 
 	rclcpp::init(argc,argv);
-
+  
+  //make the our Node as a shared pointer for multiple ownership
 	auto node = std::make_shared<HeartbeatNode>();
 	rclcpp::spin(node);	
 
